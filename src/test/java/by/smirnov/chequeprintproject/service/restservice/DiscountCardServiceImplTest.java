@@ -41,7 +41,7 @@ class DiscountCardServiceImplTest {
 
     @ParameterizedTest
     @NullSource
-    @DisplayName("FindById should return equal DiscountCard")
+    @DisplayName("FindById should return null")
     void checkFindByIdShouldReturnNull(Long id) {
         when(repository.findById(id)).thenReturn(Optional.empty());
 
