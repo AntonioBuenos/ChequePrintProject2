@@ -4,7 +4,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PathGetterTest {
@@ -19,6 +21,17 @@ class PathGetterTest {
     void checkGetPathShouldReturnEqualPath(String input, String expected) {
         String actual = PathGetter.getPath(input);
 
-        assertEquals(expected, actual);
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    @DisplayName("getPath should return improper path")
+    void checkGetPathShouldReturnDefaultPath(String input) {
+        String expected = "D:\\Java\\Anything\\ChequePrintProject2\\src\\main\\resources\\" + input;
+
+        String actual = PathGetter.getPath(input);
+
+        assertThat(actual).isEqualTo(expected);
     }
 }
