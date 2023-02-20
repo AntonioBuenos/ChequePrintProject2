@@ -14,7 +14,8 @@ class PathGetterTest {
     @ParameterizedTest
     @CsvSource(value = {
             "Cheques.txt=D:\\Java\\Anything\\ChequePrintProject2\\src\\main\\resources\\Cheques.txt",
-            "chequefiles\\Cheques.txt=D:\\Java\\Anything\\ChequePrintProject2\\src\\main\\resources\\chequefiles\\Cheques.txt"
+            "chequefiles\\Cheques.txt=D:\\Java\\Anything\\ChequePrintProject2\\src\\main\\resources\\chequefiles\\Cheques.txt",
+            "Cheques=D:\\Java\\Anything\\ChequePrintProject2\\src\\main\\resources\\Cheques.txt"
     },
             delimiter = '=')
     @DisplayName("getPath should return equal path")
@@ -26,9 +27,9 @@ class PathGetterTest {
 
     @ParameterizedTest
     @NullAndEmptySource
-    @DisplayName("getPath should return improper path")
+    @DisplayName("getPath should return default path")
     void checkGetPathShouldReturnDefaultPath(String input) {
-        String expected = "D:\\Java\\Anything\\ChequePrintProject2\\src\\main\\resources\\" + input;
+        String expected = "D:\\Java\\Anything\\ChequePrintProject2\\src\\main\\resources\\cheque.txt";
 
         String actual = PathGetter.getPath(input);
 
