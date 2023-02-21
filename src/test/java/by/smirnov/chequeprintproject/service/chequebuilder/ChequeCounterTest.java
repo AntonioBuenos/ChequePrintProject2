@@ -48,8 +48,21 @@ class ChequeCounterTest {
         assertThat(actual).isEqualTo(result);
     }
 
-    @Test
-    void getVatAmount() {
+    @ParameterizedTest
+    @DisplayName("GetTotalAmount should return result")
+    @CsvFileSource(resources = "/test_cheque_vat_amount.csv", numLinesToSkip = 1, delimiter = ',')
+    void getVatAmount(double price1, boolean promo1, int qnty1,
+                      double price2, boolean promo2, int qnty2,
+                      double cardRate, double result) {
+        products = new HashMap<>();
+        products.put(aProduct().price(price1).isPromoted(promo1).build(), qnty1);
+        products.put(aProduct().id(2L).price(price2).isPromoted(promo2).build(), qnty2);
+        card = aCard().discountRate(cardRate).build();
+        counter = new ChequeCounter(products, card);
+
+        double actual = counter.getVatAmount();
+
+        assertThat(actual).isEqualTo(result);
     }
 
     @Test
