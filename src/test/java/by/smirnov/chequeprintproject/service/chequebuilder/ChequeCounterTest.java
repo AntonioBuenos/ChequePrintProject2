@@ -66,8 +66,17 @@ class ChequeCounterTest {
         assertThat(actual).isEqualTo(result);
     }
 
-    @Test
-    void getTaxableAmount() {
+    @ParameterizedTest
+    @DisplayName("getPromotionDiscountSum should return result")
+    @CsvFileSource(resources = "/test_cheque_taxable_amount.csv", numLinesToSkip = 1, delimiter = ',')
+    void getTaxableAmount(double price1, boolean promo1, int qnty1,
+                          double price2, boolean promo2, int qnty2,
+                          double cardRate, double result) {
+        counter = getCheckCounter(price1, promo1, qnty1, price2, promo2, qnty2, cardRate);
+
+        double actual = counter.getTaxableAmount();
+
+        assertThat(actual).isEqualTo(result);
     }
 
     @Test
