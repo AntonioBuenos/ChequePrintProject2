@@ -67,9 +67,9 @@ class ChequeCounterTest {
     }
 
     @ParameterizedTest
-    @DisplayName("getPromotionDiscountSum should return result")
+    @DisplayName("getTaxableAmount should return result")
     @CsvFileSource(resources = "/test_cheque_taxable_amount.csv", numLinesToSkip = 1, delimiter = ',')
-    void getTaxableAmount(double price1, boolean promo1, int qnty1,
+    void getTaxableAmountShouldReturnResult(double price1, boolean promo1, int qnty1,
                           double price2, boolean promo2, int qnty2,
                           double cardRate, double result) {
         counter = getCheckCounter(price1, promo1, qnty1, price2, promo2, qnty2, cardRate);
@@ -79,12 +79,21 @@ class ChequeCounterTest {
         assertThat(actual).isEqualTo(result);
     }
 
-    @Test
-    void getGrossChequeAmount() {
+    @ParameterizedTest
+    @DisplayName("getGrossChequeAmount should return result")
+    @CsvFileSource(resources = "/test_cheque_gross_amount.csv", numLinesToSkip = 1, delimiter = ',')
+    void getGrossChequeAmountShouldReturnResult(double price1, boolean promo1, int qnty1,
+                              double price2, boolean promo2, int qnty2,
+                              double cardRate, double result) {
+        counter = getCheckCounter(price1, promo1, qnty1, price2, promo2, qnty2, cardRate);
+
+        double actual = counter.getGrossChequeAmount();
+
+        assertThat(actual).isEqualTo(result);
     }
 
     @Test
-    void getCardDiscountSum() {
+    void getCardDiscountSumShouldReturnResult() {
     }
 
     private ChequeCounter getCheckCounter(double price1, boolean promo1, int qnty1,
