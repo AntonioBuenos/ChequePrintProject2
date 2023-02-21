@@ -3,7 +3,6 @@ package by.smirnov.chequeprintproject.service.chequebuilder;
 import by.smirnov.chequeprintproject.domain.DiscountCard;
 import by.smirnov.chequeprintproject.domain.Product;
 import by.smirnov.chequeprintproject.domain.Promotion;
-import lombok.Builder;
 import lombok.Getter;
 import org.apache.commons.math3.util.Precision;
 
@@ -11,7 +10,6 @@ import java.math.BigDecimal;
 import java.util.Map;
 
 @Getter
-@Builder
 public class ChequeCounter {
 
     private final Map<Product, Integer> products;

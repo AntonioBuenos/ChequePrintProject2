@@ -18,10 +18,6 @@ class ChequeCounterTest {
 
     private ChequeCounter counter;
 
-    private static Map<Product, Integer> products;
-
-    private static DiscountCard card;
-
     @Test
     void getProducts() {
     }
@@ -37,11 +33,7 @@ class ChequeCounterTest {
             (double price1, boolean promo1, int qnty1,
              double price2, boolean promo2, int qnty2,
              double cardRate, double result) {
-        products = new HashMap<>();
-        products.put(aProduct().price(price1).isPromoted(promo1).build(), qnty1);
-        products.put(aProduct().id(2L).price(price2).isPromoted(promo2).build(), qnty2);
-        card = aCard().discountRate(cardRate).build();
-        counter = new ChequeCounter(products, card);
+        counter = getCheckCounter(price1, promo1, qnty1, price2, promo2, qnty2, cardRate);
 
         double actual = counter.getTotalAmount();
 
@@ -54,11 +46,7 @@ class ChequeCounterTest {
     void checkGetVatAmountShouldReturnResult(double price1, boolean promo1, int qnty1,
                       double price2, boolean promo2, int qnty2,
                       double cardRate, double result) {
-        products = new HashMap<>();
-        products.put(aProduct().price(price1).isPromoted(promo1).build(), qnty1);
-        products.put(aProduct().id(2L).price(price2).isPromoted(promo2).build(), qnty2);
-        card = aCard().discountRate(cardRate).build();
-        counter = new ChequeCounter(products, card);
+        counter = getCheckCounter(price1, promo1, qnty1, price2, promo2, qnty2, cardRate);
 
         double actual = counter.getVatAmount();
 
@@ -71,11 +59,7 @@ class ChequeCounterTest {
     void checkGetPromotionDiscountSumShouldReturnResult(double price1, boolean promo1, int qnty1,
                                  double price2, boolean promo2, int qnty2,
                                  double cardRate, double result) {
-        products = new HashMap<>();
-        products.put(aProduct().price(price1).isPromoted(promo1).build(), qnty1);
-        products.put(aProduct().id(2L).price(price2).isPromoted(promo2).build(), qnty2);
-        card = aCard().discountRate(cardRate).build();
-        counter = new ChequeCounter(products, card);
+        counter = getCheckCounter(price1, promo1, qnty1, price2, promo2, qnty2, cardRate);
 
         double actual = counter.getPromotionDiscountSum();
 
@@ -92,5 +76,15 @@ class ChequeCounterTest {
 
     @Test
     void getCardDiscountSum() {
+    }
+
+    private ChequeCounter getCheckCounter(double price1, boolean promo1, int qnty1,
+                                          double price2, boolean promo2, int qnty2,
+                                          double cardRate){
+        Map<Product, Integer> products = new HashMap<>();
+        products.put(aProduct().price(price1).isPromoted(promo1).build(), qnty1);
+        products.put(aProduct().id(2L).price(price2).isPromoted(promo2).build(), qnty2);
+        DiscountCard card = aCard().discountRate(cardRate).build();
+        return new ChequeCounter(products, card);
     }
 }
