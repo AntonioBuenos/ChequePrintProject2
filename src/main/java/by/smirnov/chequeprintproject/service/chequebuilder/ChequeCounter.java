@@ -40,7 +40,7 @@ public class ChequeCounter {
             }
             total = total.add(amount);
         }
-        grossChequeAmount = total.doubleValue();
+        grossChequeAmount = Precision.round(total.doubleValue(), 2);
         promotionDiscountSum = countPromotionDiscount(promoGoodsQty, promoAmount);
         cardDiscountSum = countCardDiscount();
         totalAmount = countTotalAmount();
@@ -54,13 +54,15 @@ public class ChequeCounter {
 
     private double countPromotionDiscount(int promoGoodsQty, BigDecimal promoAmount) {
         if (promoGoodsQty >= Promotion.minimalGoodsQty) {
-            return promoAmount.multiply(BigDecimal.valueOf(Promotion.promotionalDiscount / 100)).doubleValue();
+            return Precision.round(
+                    promoAmount.multiply(BigDecimal.valueOf(Promotion.promotionalDiscount / 100)).doubleValue(),
+                    2);
         }
         return 0;
     }
 
     private double countTotalAmount() {
-        return grossChequeAmount - (promotionDiscountSum + cardDiscountSum);
+        return Precision.round(grossChequeAmount - (promotionDiscountSum + cardDiscountSum), 2);
     }
 
     private double countVatAmount() {
@@ -68,7 +70,7 @@ public class ChequeCounter {
     }
 
     private double countTaxableAmount() {
-        return totalAmount - vatAmount;
+        return Precision.round(totalAmount - vatAmount, 2);
     }
 
 }
