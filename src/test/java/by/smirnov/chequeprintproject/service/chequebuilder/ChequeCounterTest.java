@@ -31,8 +31,14 @@ class ChequeCounterTest {
     }
 
     @Test
-    void getCard() {
+    @DisplayName("GetCard should return equal DiscountCard")
+    void checkGetCardShouldReturnEqualDiscountCard() {
+        DiscountCard expected = aCard().build();
+        counter = getCheckCounter();
 
+        DiscountCard actual = counter.getCard();
+
+        assertThat(actual).isEqualTo(expected);
     }
 
     @ParameterizedTest
