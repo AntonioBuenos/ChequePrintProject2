@@ -1,5 +1,7 @@
 package by.smirnov.chequeprintproject.testconstants;
 
+import java.sql.Timestamp;
+
 public interface TestConstants {
 
     String CHEQUE_BEGINNING =
@@ -30,4 +32,6 @@ public interface TestConstants {
                     "                *** Place your ad here ***                \n" +
                     "\n" +
                     "---------------------------------------------------------";
+
+    Timestamp DEFAULT_TIMESTAMP = Timestamp.valueOf("2022-01-01 00:00:00");
 }
