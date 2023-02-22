@@ -1,6 +1,5 @@
 package by.smirnov.chequeprintproject.service.chequebuilder;
 
-import by.smirnov.chequeprintproject.builder.DiscountCards;
 import by.smirnov.chequeprintproject.domain.DiscountCard;
 import by.smirnov.chequeprintproject.domain.Product;
 import org.junit.jupiter.api.DisplayName;

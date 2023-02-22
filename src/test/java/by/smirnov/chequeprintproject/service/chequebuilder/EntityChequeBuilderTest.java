@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static by.smirnov.chequeprintproject.builder.Products.aProduct;
 import static by.smirnov.chequeprintproject.domain.Store.SHOP;
 import static by.smirnov.chequeprintproject.service.chequebuilder.ChequeConstants.AD;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -58,20 +59,8 @@ class EntityChequeBuilderTest {
     @Test
     @DisplayName("BuildCheque should return equal ChequeResponse")
     void checkBuildChequeShouldReturnEqualResponse() {
-        products.put(Product.builder()
-                .id(1L)
-                .productName("Vic Firth drumsticks 2B")
-                .price(14.0)
-                .isPromoted(false)
-                .creationDate(Timestamp.valueOf(LocalDateTime.now()))
-                .isDeleted(false).build(), 4);
-        products.put(Product.builder()
-                .id(1L)
-                .productName("Vic Firth drumsticks 2BN")
-                .price(14.0)
-                .isPromoted(false)
-                .creationDate(Timestamp.valueOf(LocalDateTime.now()))
-                .isDeleted(false).build(), 5);
+        products.put(aProduct().build(), 4);
+        products.put(aProduct().productName("Vic Firth drumsticks 2BN").build(), 5);
 
         List<Position> productList = new ArrayList<>();
         productList.add(new Position(4, "Vic Firth drumsticks 2B", 14.0, 4 * 14.0));

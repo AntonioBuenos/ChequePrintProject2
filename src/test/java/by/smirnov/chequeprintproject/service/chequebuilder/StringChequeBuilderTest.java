@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
+import static by.smirnov.chequeprintproject.builder.Products.aProduct;
 import static by.smirnov.chequeprintproject.domain.Store.SHOP;
 import static by.smirnov.chequeprintproject.testconstants.TestConstants.CHEQUE_BEGINNING;
 import static by.smirnov.chequeprintproject.testconstants.TestConstants.CHEQUE_END;
@@ -34,20 +35,8 @@ class StringChequeBuilderTest {
 
     @BeforeAll
     static void init() {
-        products.put(Product.builder()
-                .id(1L)
-                .productName("Vic Firth drumsticks 2B")
-                .price(14.0)
-                .isPromoted(false)
-                .creationDate(Timestamp.valueOf(LocalDateTime.now()))
-                .isDeleted(false).build(), 4);
-        products.put(Product.builder()
-                .id(1L)
-                .productName("Vic Firth drumsticks 2BN")
-                .price(14.0)
-                .isPromoted(false)
-                .creationDate(Timestamp.valueOf(LocalDateTime.now()))
-                .isDeleted(false).build(), 5);
+        products.put(aProduct().build(), 4);
+        products.put(aProduct().productName("Vic Firth drumsticks 2BN").build(), 5);
     }
 
     @Test
