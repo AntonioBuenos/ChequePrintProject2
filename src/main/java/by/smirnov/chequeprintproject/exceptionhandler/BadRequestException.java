@@ -3,7 +3,11 @@ package by.smirnov.chequeprintproject.exceptionhandler;
 public class BadRequestException extends RuntimeException {
 
     public BadRequestException () {
-        super("SMTH");
+        super("Your request doesn't mach requirements");
+    }
+
+    public BadRequestException (String message) {
+        super(message);
     }
 
     @Override
