@@ -7,4 +7,6 @@ public interface ExceptionConstants {
     String CARD_NOT_FOUND_MESSAGE = "Discount card not found, wrong ID: ";
     String CASHIER_NOT_FOUND_MESSAGE = "Cashier not found, wrong ID: ";
     String ERROR_KEY = "Error Message";
+
+    String ERROR = "Error";
 }
