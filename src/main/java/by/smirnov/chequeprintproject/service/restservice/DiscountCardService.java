@@ -14,6 +14,6 @@ public interface DiscountCardService {
 
     DiscountCard update(DiscountCard toBeUpdated);
 
-    void hardDelete(Long id);
+    void delete(Long id);
 
 }

@@ -40,7 +40,7 @@ public class DiscountCardServiceImpl implements DiscountCardService{
 
     @Transactional
     @Override
-    public void hardDelete(Long id){
+    public void delete(Long id){
         repository.deleteById(id);
     }
 }
