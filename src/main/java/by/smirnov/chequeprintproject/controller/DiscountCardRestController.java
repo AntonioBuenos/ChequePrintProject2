@@ -84,7 +84,7 @@ public class DiscountCardRestController {
     @DeleteMapping(MAPPING_ID)
     public ResponseEntity<Map<String, Long>> delete(@PathVariable(ID) long id) {
         if (Objects.isNull(service.findById(id))) throw new NoSuchEntityException();
-        service.hardDelete(id);
+        service.delete(id);
         return new ResponseEntity<>(Map.of("Object by this ID successfully deleted", id), HttpStatus.OK);
     }
 }
