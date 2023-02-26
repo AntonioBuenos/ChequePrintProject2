@@ -49,8 +49,8 @@ public class DiscountCardRestController {
     @GetMapping(MAPPING_ID)
     public ResponseEntity<DiscountCardResponse> show(@PathVariable(ID) long id) {
 
-        DiscountCard genre = service.findById(id);
-        DiscountCardResponse response = converter.convert(genre);
+        DiscountCard card = service.findById(id);
+        DiscountCardResponse response = converter.convert(card);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
@@ -73,8 +73,6 @@ public class DiscountCardRestController {
         if (bindingResult.hasErrors()) {
             throw new BadRequestException(ValidationErrorConverter.getErrors(bindingResult).toString());
         }
-
-        DiscountCard genre = converter.convert(request, id);
 
         DiscountCard changed = service.update(converter.convert(request, id));
         DiscountCardResponse response = converter.convert(changed);

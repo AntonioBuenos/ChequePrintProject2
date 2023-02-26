@@ -1,4 +1,4 @@
-package by.smirnov.chequeprintproject.repository;
+package by.smirnov.chequeprintproject.repository.cache;
 
 import by.smirnov.chequeprintproject.domain.DiscountCard;
 
@@ -6,9 +6,7 @@ public interface DiscountCardCache {
 
     DiscountCard findById(Long id);
 
-    DiscountCard create(DiscountCard object);
-
-    DiscountCard update(DiscountCard toBeUpdated);
+    DiscountCard put(DiscountCard object);
 
     void delete(Long id);
 

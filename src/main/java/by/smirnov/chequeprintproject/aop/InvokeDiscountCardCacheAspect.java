@@ -1,7 +1,7 @@
 package by.smirnov.chequeprintproject.aop;
 
 import by.smirnov.chequeprintproject.domain.DiscountCard;
-import by.smirnov.chequeprintproject.repository.DiscountCardCache;
+import by.smirnov.chequeprintproject.repository.cache.DiscountCardCache;
 import by.smirnov.chequeprintproject.service.restservice.DiscountCardService;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -32,7 +32,7 @@ public class InvokeDiscountCardCacheAspect {
 
         card = (DiscountCard) joinPoint.proceed();
 
-        return cache.create(card);
+        return cache.put(card);
     }
 
     @Pointcut(value = "execution(* by.smirnov.chequeprintproject.service.restservice.DiscountCardService.create(..)) && args(card))", argNames = "card")
@@ -42,7 +42,7 @@ public class InvokeDiscountCardCacheAspect {
 
     @After(value = "afterDiscountCardServiceCreatePointcut(card)", argNames = "card")
     public void useCacheInCreateDiscountCard(DiscountCard card) {
-        cache.create(card);
+        cache.put(card);
     }
 
     @Pointcut(value = "execution(* by.smirnov.chequeprintproject.service.restservice.DiscountCardService.update(..)) && args(card))", argNames = "card")
@@ -52,7 +52,7 @@ public class InvokeDiscountCardCacheAspect {
 
     @After(value = "afterDiscountCardServiceUpdatePointcut(card)", argNames = "card")
     public void useCacheInUpdateDiscountCard(DiscountCard card) {
-        cache.update(card);
+        cache.put(card);
     }
 
     @Pointcut(value = "execution(* by.smirnov.chequeprintproject.service.restservice.DiscountCardService.delete(..)) && args(id))", argNames = "id")

@@ -33,7 +33,7 @@ public class DiscountCardConverter {
         return old;
     }
 
-    public DiscountCardResponse convert(DiscountCard genre){
-        return modelMapper.map(genre, DiscountCardResponse.class);
+    public DiscountCardResponse convert(DiscountCard card){
+        return modelMapper.map(card, DiscountCardResponse.class);
     }
 }

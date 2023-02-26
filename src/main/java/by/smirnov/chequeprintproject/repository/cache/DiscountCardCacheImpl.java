@@ -1,4 +1,4 @@
-package by.smirnov.chequeprintproject.repository;
+package by.smirnov.chequeprintproject.repository.cache;
 
 import by.smirnov.chequeprintproject.domain.DiscountCard;
 import org.springframework.stereotype.Component;
@@ -24,15 +24,9 @@ public class DiscountCardCacheImpl implements DiscountCardCache{
     }
 
     @Override
-    public DiscountCard create(DiscountCard object) {
+    public DiscountCard put(DiscountCard object) {
         cache.put(object.getId(), object);
         return object;
-    }
-
-    @Override
-    public DiscountCard update(DiscountCard toBeUpdated) {
-        cache.put(toBeUpdated.getId(), toBeUpdated);
-        return toBeUpdated;
     }
 
     @Override
