@@ -1,5 +1,6 @@
 package by.smirnov.chequeprintproject.repository.cache;
 
+import by.smirnov.chequeprintproject.config.CacheConfiguration;
 import by.smirnov.chequeprintproject.domain.DiscountCard;
 import lombok.extern.slf4j.Slf4j;
 
@@ -15,7 +16,7 @@ import static by.smirnov.chequeprintproject.exceptionhandler.ExceptionConstants.
 public abstract class NodeCache {
 
     Map<Long, Node> map = new HashMap<>();
-    private static final int MAX_ENTRIES = 3;
+    private static final int CACHE_LIMIT = CacheConfiguration.getCacheLimit();
 
     public DiscountCard findById(Long id) {
         Node node = map.get(id);
@@ -32,7 +33,7 @@ public abstract class NodeCache {
     }
 
     void normalizeCacheSize() {
-        if (map.size() >= MAX_ENTRIES) {
+        if (map.size() >= CACHE_LIMIT) {
             try{
                 Long rarelyUsedId = map.values().stream().
                         min(Comparator.comparing(Node::getCount))
