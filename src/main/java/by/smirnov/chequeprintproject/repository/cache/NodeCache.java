@@ -22,7 +22,6 @@ public abstract class NodeCache {
         Node node = map.get(id);
         if(node==null) return null;
         put(node.getValue());
-        System.out.println(map.toString());
         return node.getValue();
     }
 
