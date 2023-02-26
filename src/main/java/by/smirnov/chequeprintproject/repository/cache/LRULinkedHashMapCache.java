@@ -1,13 +1,11 @@
 package by.smirnov.chequeprintproject.repository.cache;
 
 import by.smirnov.chequeprintproject.domain.DiscountCard;
-import org.springframework.stereotype.Component;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-@Component
-public class DiscountCardCacheImpl implements DiscountCardCache{
+public class LRULinkedHashMapCache implements DiscountCardCache{
 
     private static final int MAX_ENTRIES = 10;
 
