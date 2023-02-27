@@ -19,9 +19,16 @@ import static by.smirnov.chequeprintproject.exceptionhandler.ExceptionConstants.
  */
 public class JsonParser {
 
+    /** This field is a pattern to parse json field */
     private static final String JSON_FIELD_PATTERN = "(\"[\\w]+\":)((\\[.*])|(\\{.*})|([@.\\w\\s\\d\"]+))";
+
+    /** This field is a pattern to check matches of a json object */
     private static final String JSON_OBJECT_PATTERN = "(\"[\\w]+\":)(\\{.*})";
+
+    /** This field is a format of a json field output */
     private static final String JSON_FIELD_OUTPUT_FORMAT = "\"%s\":%s";
+
+    /** This field is a format of a json String field output */
     private static final String JSON_STRING_OUTPUT_FORMAT = "\"%s\":\"%s\"";
 
     /**
