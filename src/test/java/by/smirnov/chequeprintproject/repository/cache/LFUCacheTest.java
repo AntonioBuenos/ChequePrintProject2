@@ -27,7 +27,6 @@ class LFUCacheTest {
     @DisplayName("findById should return card with right id")
     @ValueSource(longs = {1L, 2L, 3L})
     void checkFindByIdShouldReturnCardWithRightId(Long id) {
-        System.out.println();
         DiscountCard actual = cache.findById(id);
         assertThat(actual.getId()).isEqualTo(id);
     }
@@ -37,7 +36,6 @@ class LFUCacheTest {
     @CsvSource(value = {"1,2", "2,3", "3,4"},
     delimiter = ',')
     void checkFindByIdShouldIncrementNodeCount(Long id, Long count) {
-        System.out.println();
         cache.findById(id);
         Node actual = cache.map.get(id);
         assertThat(actual.getCount()).isEqualTo(count);
@@ -47,7 +45,6 @@ class LFUCacheTest {
     @DisplayName("findById should return null")
     @ValueSource(longs = {-1L, 0L, 100500L})
     void checkFindByIdShouldReturnNull(Long id) {
-        System.out.println();
         DiscountCard actual = cache.findById(id);
         assertThat(actual).isNull();
     }
