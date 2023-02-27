@@ -5,12 +5,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static by.smirnov.chequeprintproject.builder.DiscountCards.aCard;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LRUCacheTest {
 
@@ -18,7 +16,7 @@ class LRUCacheTest {
 
     @BeforeEach
     void init(){
-        LFUCache.cacheLimit = 3;
+        LRUCache.cacheLimit = 3;
         cache.map.put(1L, new Node(aCard().id(1L).build(), 1L));
         cache.map.put(2L, new Node(aCard().id(2L).build(), 2L));
         cache.map.put(3L, new Node(aCard().id(3L).build(), 3L));
