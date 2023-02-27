@@ -11,6 +11,13 @@ import java.util.regex.Pattern;
 
 import static by.smirnov.chequeprintproject.exceptionhandler.ExceptionConstants.JSON_PARSING_ERROR_MESSAGE;
 
+/**
+ * This is a class of a simple JSON parser. It is not covering all JSON serialization and deserialisation cases. For
+ * common parsing use other specialised JSON parsers or mappers.
+ *
+ * @author Anton Smirnov
+ * @version 1.1
+ */
 public class JsonParser {
 
     private static final String JSON_FIELD_PATTERN = "(\"[\\w]+\":)((\\[.*])|(\\{.*})|([@.\\w\\s\\d\"]+))";
@@ -18,6 +25,12 @@ public class JsonParser {
     private static final String JSON_FIELD_OUTPUT_FORMAT = "\"%s\":%s";
     private static final String JSON_STRING_OUTPUT_FORMAT = "\"%s\":\"%s\"";
 
+    /**
+     * This method parses JSON-formed String object to an object of a specified class
+     * @param json  - JSON-formed String to be parsed
+     * @param clazz - class of an object which json shall be deserialized to
+     * @return returns a deserialized object
+     */
     public <T> T deserialize(String json, Class<T> clazz) throws NoSuchMethodException, InvocationTargetException,
             InstantiationException, IllegalAccessException, NoSuchFieldException {
         var output = clazz.getDeclaredConstructor().newInstance();
@@ -76,13 +89,18 @@ public class JsonParser {
         List<String> pairs = new ArrayList<>();
         Pattern pattern = Pattern.compile(JSON_FIELD_PATTERN);
         Matcher matcher = pattern.matcher(object);
-        while (matcher.find()){
+        while (matcher.find()) {
             String result = matcher.group();
             pairs.add(result);
         }
         return pairs;
     }
 
+    /**
+     * This method parses JSON-formed String object to an object of a specified class
+     * @param object  - object to be serialized
+     * @return returns a JSON-formed String with no unnecessary spaces
+     */
     public String serialize(Object object) throws IllegalAccessException {
         List<Field> fields = List.of(object.getClass().getDeclaredFields());
 
@@ -92,13 +110,12 @@ public class JsonParser {
             field.setAccessible(true);
             String name = field.getName();
             Object fieldObject = field.get(object);
-            if(fieldObject instanceof String) {
+            if (fieldObject instanceof String) {
                 joiner.add(String.format(JSON_STRING_OUTPUT_FORMAT, name, fieldObject));
-            } else if(fieldObject instanceof Number || fieldObject instanceof Timestamp
-                    || fieldObject instanceof Boolean || fieldObject==null) {
+            } else if (fieldObject instanceof Number || fieldObject instanceof Timestamp
+                    || fieldObject instanceof Boolean || fieldObject == null) {
                 joiner.add(String.format(JSON_FIELD_OUTPUT_FORMAT, name, fieldObject));
-            }
-            else joiner.add(String.format(JSON_FIELD_OUTPUT_FORMAT, name, serialize(fieldObject)));
+            } else joiner.add(String.format(JSON_FIELD_OUTPUT_FORMAT, name, serialize(fieldObject)));
         }
         return joiner.toString();
     }
