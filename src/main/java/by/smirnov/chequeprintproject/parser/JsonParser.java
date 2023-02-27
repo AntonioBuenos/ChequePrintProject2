@@ -16,6 +16,7 @@ public class JsonParser {
     private static final String JSON_FIELD_PATTERN = "(\"[\\w]+\":)((\\[.*])|(\\{.*})|([@.\\w\\s\\d\"]+))";
     private static final String JSON_OBJECT_PATTERN = "(\"[\\w]+\":)(\\{.*})";
     private static final String JSON_FIELD_OUTPUT_FORMAT = "\"%s\":%s";
+    private static final String JSON_STRING_OUTPUT_FORMAT = "\"%s\":\"%s\"";
 
     public <T> T deserialize(String json, Class<T> clazz) throws NoSuchMethodException, InvocationTargetException,
             InstantiationException, IllegalAccessException, NoSuchFieldException {
@@ -27,7 +28,7 @@ public class JsonParser {
         for (String pair : pairs) {
             String[] keyValue = pair.split(":");
             String key = keyValue[0].trim().replaceAll("\"", "");
-            String value = keyValue[1].trim();
+            String value = keyValue[1].trim().replaceAll("\"", "");
 
             Field field = getPairField(fields, key);
             field.setAccessible(true);
@@ -40,7 +41,8 @@ public class JsonParser {
     private Object convertValue(Class<?> type, String value) throws NoSuchFieldException, InvocationTargetException,
             NoSuchMethodException, InstantiationException, IllegalAccessException {
         Object parsed = null;
-        if (String.class.equals(type)) parsed = value;
+        if (value.equals("null")) parsed = null;
+        else if (String.class.equals(type)) parsed = value;
         else if (Integer.class.equals(type) || int.class.equals(type)) {
             parsed = Integer.parseInt(value);
         } else if (Long.class.equals(type) || long.class.equals(type)) {
@@ -90,8 +92,10 @@ public class JsonParser {
             field.setAccessible(true);
             String name = field.getName();
             Object fieldObject = field.get(object);
-            if(fieldObject instanceof Number || fieldObject instanceof String || fieldObject instanceof Timestamp
-                    || fieldObject instanceof Boolean) {
+            if(fieldObject instanceof String) {
+                joiner.add(String.format(JSON_STRING_OUTPUT_FORMAT, name, fieldObject));
+            } else if(fieldObject instanceof Number || fieldObject instanceof Timestamp
+                    || fieldObject instanceof Boolean || fieldObject==null) {
                 joiner.add(String.format(JSON_FIELD_OUTPUT_FORMAT, name, fieldObject));
             }
             else joiner.add(String.format(JSON_FIELD_OUTPUT_FORMAT, name, serialize(fieldObject)));
