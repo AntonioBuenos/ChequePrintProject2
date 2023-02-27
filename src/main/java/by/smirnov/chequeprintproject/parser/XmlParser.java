@@ -5,12 +5,14 @@ import java.lang.reflect.InvocationTargetException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringJoiner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class XmlParser {
     private static final String XML_FIELD_PATTERN = "(<[\\w]+>)([\\w\\d\\s@.]+)(</[\\w]+>)";
     private static final String XML_OBJECT_PATTERN = "(<[\\w]+>)([\\w\\d\\s@.<>/\\n]+)(</[\\w]+>)";
+    private static final String XML_FIELD_OUTPUT_FORMAT = "<%s>%s</%s>";
 
     public <T> T deserialize(String json, Class<T> clazz) throws NoSuchMethodException, InvocationTargetException,
             InstantiationException, IllegalAccessException, NoSuchFieldException {
@@ -77,5 +79,33 @@ public class XmlParser {
             pairs.add(result);
         }
         return pairs;
+    }
+
+    public String serialize(Object object) throws IllegalAccessException {
+        List<Field> fields = List.of(object.getClass().getDeclaredFields());
+
+        String className = object.getClass().getSimpleName();
+
+        StringJoiner joiner = new StringJoiner("\n", openTag(className) + "\n", "\n" + closeTag(className));
+
+        for (Field field : fields) {
+            field.setAccessible(true);
+            String name = field.getName();
+            Object fieldObject = field.get(object);
+            if(fieldObject instanceof Number || fieldObject instanceof String || fieldObject instanceof Timestamp
+                    || fieldObject instanceof Boolean || fieldObject == null) {
+                joiner.add(String.format(XML_FIELD_OUTPUT_FORMAT, name, fieldObject, name));
+            }
+            else joiner.add(serialize(fieldObject));
+        }
+        return joiner.toString();
+    }
+
+    private String openTag(String name){
+        return String.format("<%s>", name);
+    }
+
+    private String closeTag(String name){
+        return String.format("</%s>", name);
     }
 }

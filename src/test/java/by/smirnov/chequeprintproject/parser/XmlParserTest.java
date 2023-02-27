@@ -14,14 +14,14 @@ class XmlParserTest {
     private XmlParser parser = new XmlParser();
 
     private String testXml = """
-            <DiscountCardResponse>
+            <DiscountCard>
             <id>5</id>
             <holderName>John</holderName>
             <holderEmail>john@john.com</holderEmail>
             <discountRate>5.0</discountRate>
             <isActive>true</isActive>
             <creationDate>null</creationDate>
-            </DiscountCardResponse>
+            </DiscountCard>
             """;
 
     private final DiscountCard testCard = aCard().creationDate(null).build();
@@ -31,5 +31,11 @@ class XmlParserTest {
             InstantiationException, IllegalAccessException {
         DiscountCard actual = parser.deserialize(testXml, DiscountCard.class);
         assertThat(actual).isEqualTo(testCard);
+    }
+
+    @Test
+    void serialize() throws IllegalAccessException {
+        String actual = parser.serialize(testCard);
+        assertThat(actual).isEqualTo(testXml.trim());
     }
 }
