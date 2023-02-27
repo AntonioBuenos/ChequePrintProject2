@@ -14,7 +14,6 @@ import static by.smirnov.chequeprintproject.exceptionhandler.ExceptionConstants.
 /**
  * This is a class of a simple JSON parser. It is not covering all JSON serialization and deserialisation cases. For
  * common parsing use other specialised JSON parsers or mappers.
- *
  * @author Anton Smirnov
  * @version 1.1
  */
