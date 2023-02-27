@@ -16,7 +16,7 @@ import static by.smirnov.chequeprintproject.exceptionhandler.ExceptionConstants.
 public abstract class NodeCache {
 
     Map<Long, Node> map = new HashMap<>();
-    private static final int CACHE_LIMIT = CacheConfiguration.getCacheLimit();
+    static int cacheLimit = CacheConfiguration.getCacheLimit();
 
     public DiscountCard findById(Long id) {
         Node node = map.get(id);
@@ -32,7 +32,7 @@ public abstract class NodeCache {
     }
 
     void normalizeCacheSize() {
-        if (map.size() >= CACHE_LIMIT) {
+        if (map.size() >= cacheLimit) {
             try{
                 Long rarelyUsedId = map.values().stream().
                         min(Comparator.comparing(Node::getCount))

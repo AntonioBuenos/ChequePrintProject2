@@ -17,6 +17,7 @@ class LFUCacheTest {
 
     @BeforeEach
     void init(){
+        LFUCache.cacheLimit = 3;
         cache.map.put(1L, new Node(aCard().id(1L).build(), 1L));
         cache.map.put(2L, new Node(aCard().id(2L).build(), 2L));
         cache.map.put(3L, new Node(aCard().id(3L).build(), 3L));
@@ -52,10 +53,38 @@ class LFUCacheTest {
     }
 
     @Test
-    void delete() {
+    @DisplayName("delete decrements cache size")
+    void checkDeleteDecrementsCacheSize() {
+        cache.delete(1L);
+        assertThat(cache.map).hasSize(2);
     }
 
     @Test
-    void put() {
+    @DisplayName("delete removes right element")
+    void checkDeleteRemovesRightElement() {
+        cache.delete(1L);
+        DiscountCard actual = cache.findById(1L);
+        assertThat(actual).isNull();
+    }
+
+    @Test
+    @DisplayName("put removes weakest card")
+    void checkPutRemovesWeakestCard() {
+        DiscountCard newCard = aCard().id(5L).build();
+        DiscountCard actual = cache.put(newCard);
+        assertThat(actual).isEqualTo(newCard);
+        assertThat(cache.map).hasSize(3);
+        assertThat(cache.map.get(1L)).isNull();
+    }
+
+    @Test
+    @DisplayName("put should increment counter")
+    void checkPutShouldIncrementCounter() {
+        DiscountCard oldCard = aCard().id(1L).build();
+        DiscountCard actual = cache.put(oldCard);
+        assertThat(actual).isEqualTo(oldCard);
+        assertThat(cache.map).hasSize(3);
+        Node actualNode = cache.map.get(1L);
+        assertThat(actualNode.getCount()).isEqualTo(2);
     }
 }

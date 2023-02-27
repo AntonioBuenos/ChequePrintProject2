@@ -8,12 +8,12 @@ import java.util.Map;
 
 public class LRULinkedHashMapCache implements DiscountCardCache{
 
-    private static final int CACHE_LIMIT = CacheConfiguration.getCacheLimit();
+    private static int cacheLimit = CacheConfiguration.getCacheLimit();
 
     private final Map<Long, DiscountCard> cache = new LinkedHashMap<>(16, 0.75f, true){
         @Override
         protected boolean removeEldestEntry(Map.Entry<Long, DiscountCard> eldest) {
-            return size() > CACHE_LIMIT;
+            return size() > cacheLimit;
         }
     };
 
