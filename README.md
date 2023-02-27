@@ -1,8 +1,11 @@
 # ChequePrintProject
+
 ___
 Console Project for printing cheques + RESTful Spring cheque printing functionality backend API
 ___
+
 ### The project stack:
+
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white)
 ![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
 ![Gradle](https://img.shields.io/badge/Gradle-02303A.svg?style=for-the-badge&logo=Gradle&logoColor=white)
@@ -19,7 +22,9 @@ ___
 - JUnit 5 tests;
 - Additional libraries: Lombok & Apache Commons;
 - Git & GitHub.
+
 ___
+
 ### Instructions:
 
 1) The app consists of console and Spring Boot Rest API parts.
@@ -41,22 +46,25 @@ ___
    your Frontend, Postman or Intellij IDEA generated requests.
 
 Example:
+
 ```json
 {
   "products": {
     "1": 2,
     "2": 3,
     "3": 4
-    },
+  },
   "cardId": 1,
   "cashierId": 1001
 }
 ```
+
 5) Console requests will be printed both to console and to file Cheques.txt (shall be added to the cheques band) in the
    app resources folder.
 6) Spring Boot Rest API request will return JSON Response with all information allowable in printed console app cheque.
 
 Response format example:
+
 ```json
 {
   "title": "CASH RECEIPT",
@@ -95,13 +103,30 @@ Response format example:
   "ad": "*** Place your ad here ***"
 }
 ```
+
 7) PostgreSQL settings as well as other necessary Spring Boot settings are listed in application.properties file.
 8) DB init script is described by Flyway migration script in resources.db.migration.V1_1__initial_script.sql.
 9) DB may be filled by test product and discount card objects. You may use script in resources.DB_insert_entities.sql
    for it.
+
 ___
+
 ### Printed Cheque Example:
+
 ![This is an image](https://i.ibb.co/HD5gf0D/Cheque.jpg)
 ___
+
 ### DB Diagram:
+
 ![This is an image](https://i.ibb.co/9w0xmYz/chequebase.jpg)
+___
+
+### Recent amendments:
+
+1) Cache package - it provides a cache that caches DiscountCard entities. LRU, LFU or LRU LinkedHashMap cache
+   implementations are available. You may set a cache type by choosing LRU (default), LFU or LRU_LHM in application.yml.
+   The cache limit has to be set in application.yml. This is an educational test cache realization. For production use
+   more common libraries ones.
+2) JSON parser - an educational light test cache realization, may be used in project for different cases of JSON
+   serialization / deserializarion cases. As it doesn't cover all parsing cases, for common use try other standard
+   libraries.
