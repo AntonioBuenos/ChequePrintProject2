@@ -1,0 +1,11 @@
+price1, promo1, qnty1, price2, promo2, qnty2, cardRate, result
+14.0, false, 4, 14.0, false, 5, 5.0,  19.95
+14.0, false, 3, 17.0, false, 5, 5.0,  20.11
+14.0, true,  3, 17.0, false, 5, 5.0,  20.11
+14.0, false, 3, 17.0, true,  5, 5.0,  18.69
+14.0, true,  3, 17.0, true,  5, 5.0,  17.99
+14.0, false, 4, 14.0, false, 5, 0.0,  21.00
+14.0, false, 3, 17.0, false, 5, 3.0,  20.53
+14.0, true,  3, 17.0, false, 5, 10.0, 19.05
+14.0, false, 3, 17.0, true,  5, 30.0, 13.40
+14.0, true,  3, 17.0, true,  5, 50.0, 8.47
