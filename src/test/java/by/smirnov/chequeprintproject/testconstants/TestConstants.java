@@ -33,5 +33,5 @@ public interface TestConstants {
                     "\n" +
                     "---------------------------------------------------------";
 
-    Timestamp DEFAULT_TIMESTAMP = Timestamp.valueOf("2022-01-01 00:00:00");
+    Timestamp DEFAULT_TIMESTAMP = Timestamp.valueOf("2022-12-17 23:49:38");
 }
