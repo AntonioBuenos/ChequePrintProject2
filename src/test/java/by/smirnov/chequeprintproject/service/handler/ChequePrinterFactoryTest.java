@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ChequePrinterFactoryTest {
@@ -22,8 +23,10 @@ class ChequePrinterFactoryTest {
     void checkCreatePrinterShouldReturnProperCheckPrinter(ChequePrinterFactory.PrinterType type) {
         ChequePrinter chequePrinter = chequePrinterFactory.createPrinter(type);
 
-        if(type == ChequePrinterFactory.PrinterType.FILE) assertTrue(chequePrinter instanceof FileChequePrinter);
-        else if (type == ChequePrinterFactory.PrinterType.CONSOLE) assertTrue(chequePrinter instanceof ConsoleChequePrinter);
+        if(type == ChequePrinterFactory.PrinterType.FILE)
+            assertThat(chequePrinter).isExactlyInstanceOf(FileChequePrinter.class);
+        else if (type == ChequePrinterFactory.PrinterType.CONSOLE)
+            assertThat(chequePrinter).isExactlyInstanceOf(ConsoleChequePrinter.class);
     }
 
     @ParameterizedTest
