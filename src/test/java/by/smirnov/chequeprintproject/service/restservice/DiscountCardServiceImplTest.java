@@ -13,6 +13,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
+import static by.smirnov.chequeprintproject.builder.DiscountCards.aCard;
+import static by.smirnov.chequeprintproject.testconstants.TestConstants.TEST_ID;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -26,15 +28,13 @@ class DiscountCardServiceImplTest {
     @InjectMocks
     private DiscountCardServiceImpl service;
 
-    private static final long ID = 1L;
-
     @Test
     @DisplayName("FindById should return equal DiscountCard")
     void checkFindByIdShouldReturnEqualDiscountCard() {
-        final DiscountCard expected = mock(DiscountCard.class);
-        when(repository.findById(ID)).thenReturn(Optional.of(expected));
+        DiscountCard expected = aCard().build();
+        when(repository.findById(TEST_ID)).thenReturn(Optional.of(expected));
 
-        final DiscountCard actual = service.findById(ID);
+        DiscountCard actual = service.findById(TEST_ID);
 
         assertThat(expected).isEqualTo(actual);
     }

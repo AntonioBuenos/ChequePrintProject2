@@ -34,4 +34,6 @@ public interface TestConstants {
                     "---------------------------------------------------------";
 
     Timestamp DEFAULT_TIMESTAMP = Timestamp.valueOf("2022-12-17 23:49:38");
+
+    Long TEST_ID = 1L;
 }

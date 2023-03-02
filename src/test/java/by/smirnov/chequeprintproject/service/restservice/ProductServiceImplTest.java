@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import static by.smirnov.chequeprintproject.builder.Products.aProduct;
 import static by.smirnov.chequeprintproject.exceptionhandler.ExceptionConstants.CARD_NOT_FOUND_MESSAGE;
 import static by.smirnov.chequeprintproject.exceptionhandler.ExceptionConstants.PRODUCT_NOT_FOUND_MESSAGE;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -45,9 +46,7 @@ class ProductServiceImplTest {
 
     @BeforeAll
     static void init(){
-        products = new HashMap<>();
-        products.put(1L, 4);
-        products.put(2L, 5);
+        products = Map.of(1L, 4, 2L, 5);
     }
 
     @Nested
@@ -56,10 +55,10 @@ class ProductServiceImplTest {
         @Test
         @DisplayName("FindById should return equal Product")
         void checkFindByIdShouldReturnEqualProduct() {
-            final Product expected = mock(Product.class);
+            Product expected = mock(Product.class);
             when(repository.findById(ID)).thenReturn(Optional.of(expected));
 
-            final Product actual = service.findById(ID);
+            Product actual = service.findById(ID);
 
             assertThat(expected).isEqualTo(actual);
         }
@@ -70,13 +69,11 @@ class ProductServiceImplTest {
         void checkFindByIdShouldReturnNull(Long id) {
             when(repository.findById(id)).thenReturn(Optional.empty());
 
-            final Product actual = service.findById(id);
+            Product actual = service.findById(id);
 
             assertThat(actual).isNull();
         }
     }
-
-
 
     @Test
     @DisplayName("getCheque Throws NoSuchEntityException")
@@ -94,11 +91,9 @@ class ProductServiceImplTest {
         @Test
         @DisplayName("convertCart Should Return Equal Map")
         void checkConvertCartShouldReturnEqualMap() {
-            Product product1 = mock(Product.class);
-            Product product2 = mock(Product.class);
-            Map<Product, Integer> expected = new HashMap<>();
-            expected.put(product1, 4);
-            expected.put(product2, 5);
+            Product product1 = aProduct().build();
+            Product product2 = aProduct().id(2L).build();
+            Map<Product, Integer> expected = Map.of(product1, 4, product2, 5);
             doReturn(Optional.of(product1)).when(repository).findById(1L);
             doReturn(Optional.of(product2)).when(repository).findById(2L);
 
@@ -110,7 +105,7 @@ class ProductServiceImplTest {
         @Test
         @DisplayName("convertCart Throws NoSuchEntityException")
         void checkConvertCartThrowsNoSuchEntityException() {
-            Product product1 = mock(Product.class);
+            Product product1 = aProduct().build();
             doReturn(Optional.of(product1)).when(repository).findById(1L);
             doReturn(Optional.empty()).when(repository).findById(2L);
 
