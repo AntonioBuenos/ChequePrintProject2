@@ -13,9 +13,9 @@ class PathGetterTest {
 
     @ParameterizedTest
     @CsvSource(value = {
-            "Cheques.txt=D:\\Java\\Anything\\ChequePrintProject2\\src\\main\\resources\\Cheques.txt",
-            "chequefiles\\Cheques.txt=D:\\Java\\Anything\\ChequePrintProject2\\src\\main\\resources\\chequefiles\\Cheques.txt",
-            "Cheques=D:\\Java\\Anything\\ChequePrintProject2\\src\\main\\resources\\Cheques.txt"
+            "Cheques.txt = D:\\Java\\Anything\\ChequePrintProject2\\src\\main\\resources\\Cheques.txt",
+            "chequefiles\\Cheques.txt = D:\\Java\\Anything\\ChequePrintProject2\\src\\main\\resources\\chequefiles\\Cheques.txt",
+            "Cheques = D:\\Java\\Anything\\ChequePrintProject2\\src\\main\\resources\\Cheques.txt"
     },
             delimiter = '=')
     @DisplayName("getPath should return equal path")

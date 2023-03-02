@@ -10,8 +10,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,7 +17,7 @@ import static by.smirnov.chequeprintproject.builder.Products.aProduct;
 import static by.smirnov.chequeprintproject.domain.Store.SHOP;
 import static by.smirnov.chequeprintproject.testconstants.TestConstants.CHEQUE_BEGINNING;
 import static by.smirnov.chequeprintproject.testconstants.TestConstants.CHEQUE_END;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.doReturn;
 
 @ExtendWith(MockitoExtension.class)
@@ -52,7 +50,7 @@ class StringChequeBuilderTest {
         doReturn(19.95).when(chequeCounter).getVatAmount();
         doReturn(119.7).when(chequeCounter).getTotalAmount();
 
-        assertTrue(chequeBuilder.buildCheque(cashier).toString().contains(CHEQUE_BEGINNING));
-        assertTrue(chequeBuilder.buildCheque(cashier).toString().contains(CHEQUE_END));
+        assertThat(chequeBuilder.buildCheque(cashier).toString()).contains(CHEQUE_BEGINNING);
+        assertThat(chequeBuilder.buildCheque(cashier).toString()).contains(CHEQUE_END);
     }
 }

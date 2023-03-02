@@ -1,6 +1,13 @@
 package by.smirnov.chequeprintproject.testconstants;
 
+import by.smirnov.chequeprintproject.domain.ChequeResponse;
+import by.smirnov.chequeprintproject.domain.Position;
+
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.List;
+
+import static by.smirnov.chequeprintproject.service.chequebuilder.ChequeConstants.AD;
 
 public interface TestConstants {
 
@@ -36,4 +43,5 @@ public interface TestConstants {
     Timestamp DEFAULT_TIMESTAMP = Timestamp.valueOf("2022-12-17 23:49:38");
 
     Long TEST_ID = 1L;
+
 }

@@ -46,7 +46,9 @@ class ProductServiceImplTest {
 
     @BeforeAll
     static void init(){
-        products = Map.of(1L, 4, 2L, 5);
+        products = new HashMap<>();
+        products.put(1L, 4);
+        products.put(2L, 5);
     }
 
     @Nested
