@@ -43,12 +43,12 @@ class ChequeCounterTest {
     }
 
     @ParameterizedTest
-    @DisplayName("GetTotalAmount should return result")
+    @DisplayName("GetTotalAmount should return total amount")
     @CsvFileSource(resources = "/test_cheque_total_amount.csv", numLinesToSkip = 1, delimiter = ',')
-    void checkGetTotalAmountShouldReturnResult
+    void checkGetTotalAmountShouldReturnTotalAmount
             (double fstGoodPrice, boolean fstIsDiscounted, int fstGoodQty,
              double sndGoodPrice, boolean sndIsDiscounted, int sndGoodQty,
-             double cardDiscountRate, double result) {
+             double cardDiscountRate, double expectedAmount) {
         counter = getCheckCounter(
                 fstGoodPrice, fstIsDiscounted, fstGoodQty,
                 sndGoodPrice, sndIsDiscounted, sndGoodQty,
@@ -56,15 +56,15 @@ class ChequeCounterTest {
 
         double actual = counter.getTotalAmount();
 
-        assertThat(actual).isEqualTo(result);
+        assertThat(actual).isEqualTo(expectedAmount);
     }
 
     @ParameterizedTest
-    @DisplayName("getVatAmount should return result")
+    @DisplayName("getVatAmount should return vat amount")
     @CsvFileSource(resources = "/test_cheque_vat_amount.csv", numLinesToSkip = 1, delimiter = ',')
-    void checkGetVatAmountShouldReturnResult(double fstGoodPrice, boolean fstIsDiscounted, int fstGoodQty,
-                                             double sndGoodPrice, boolean sndIsDiscounted, int sndGoodQty,
-                                             double cardDiscountRate, double result) {
+    void checkGetVatAmountShouldReturnVatAmount(double fstGoodPrice, boolean fstIsDiscounted, int fstGoodQty,
+                                                double sndGoodPrice, boolean sndIsDiscounted, int sndGoodQty,
+                                                double cardDiscountRate, double expectedAmount) {
         counter = getCheckCounter(
                 fstGoodPrice, fstIsDiscounted, fstGoodQty,
                 sndGoodPrice, sndIsDiscounted, sndGoodQty,
@@ -72,15 +72,16 @@ class ChequeCounterTest {
 
         double actual = counter.getVatAmount();
 
-        assertThat(actual).isEqualTo(result);
+        assertThat(actual).isEqualTo(expectedAmount);
     }
 
     @ParameterizedTest
-    @DisplayName("getPromotionDiscountSum should return result")
+    @DisplayName("getPromotionDiscountSum should return discount sum")
     @CsvFileSource(resources = "/test_cheque_promotion_discount.csv", numLinesToSkip = 1, delimiter = ',')
-    void checkGetPromotionDiscountSumShouldReturnResult(double fstGoodPrice, boolean fstIsDiscounted, int fstGoodQty,
-                                                        double sndGoodPrice, boolean sndIsDiscounted, int sndGoodQty,
-                                                        double cardDiscountRate, double result) {
+    void checkGetPromotionDiscountSumShouldReturnDiscountSum
+            (double fstGoodPrice, boolean fstIsDiscounted, int fstGoodQty,
+             double sndGoodPrice, boolean sndIsDiscounted, int sndGoodQty,
+             double cardDiscountRate, double expectedAmount) {
         counter = getCheckCounter(
                 fstGoodPrice, fstIsDiscounted, fstGoodQty,
                 sndGoodPrice, sndIsDiscounted, sndGoodQty,
@@ -88,15 +89,16 @@ class ChequeCounterTest {
 
         double actual = counter.getPromotionDiscountSum();
 
-        assertThat(actual).isEqualTo(result);
+        assertThat(actual).isEqualTo(expectedAmount);
     }
 
     @ParameterizedTest
-    @DisplayName("getTaxableAmount should return result")
+    @DisplayName("getTaxableAmount should return taxable amount")
     @CsvFileSource(resources = "/test_cheque_taxable_amount.csv", numLinesToSkip = 1, delimiter = ',')
-    void getTaxableAmountShouldReturnResult(double fstGoodPrice, boolean fstIsDiscounted, int fstGoodQty,
-                                            double sndGoodPrice, boolean sndIsDiscounted, int sndGoodQty,
-                                            double cardDiscountRate, double result) {
+    void getTaxableAmountShouldReturnTaxableAmount
+            (double fstGoodPrice, boolean fstIsDiscounted, int fstGoodQty,
+             double sndGoodPrice, boolean sndIsDiscounted, int sndGoodQty,
+             double cardDiscountRate, double expectedAmount) {
         counter = getCheckCounter(
                 fstGoodPrice, fstIsDiscounted, fstGoodQty,
                 sndGoodPrice, sndIsDiscounted, sndGoodQty,
@@ -104,15 +106,16 @@ class ChequeCounterTest {
 
         double actual = counter.getTaxableAmount();
 
-        assertThat(actual).isEqualTo(result);
+        assertThat(actual).isEqualTo(expectedAmount);
     }
 
     @ParameterizedTest
-    @DisplayName("getGrossChequeAmount should return result")
+    @DisplayName("getGrossChequeAmount should return gross amount")
     @CsvFileSource(resources = "/test_cheque_gross_amount.csv", numLinesToSkip = 1, delimiter = ',')
-    void getGrossChequeAmountShouldReturnResult(double fstGoodPrice, boolean fstIsDiscounted, int fstGoodQty,
-                                                double sndGoodPrice, boolean sndIsDiscounted, int sndGoodQty,
-                                                double cardDiscountRate, double result) {
+    void getGrossChequeAmountShouldReturnGrossAmount
+            (double fstGoodPrice, boolean fstIsDiscounted, int fstGoodQty,
+             double sndGoodPrice, boolean sndIsDiscounted, int sndGoodQty,
+             double cardDiscountRate, double expectedAmount) {
         counter = getCheckCounter(
                 fstGoodPrice, fstIsDiscounted, fstGoodQty,
                 sndGoodPrice, sndIsDiscounted, sndGoodQty,
@@ -120,15 +123,16 @@ class ChequeCounterTest {
 
         double actual = counter.getGrossChequeAmount();
 
-        assertThat(actual).isEqualTo(result);
+        assertThat(actual).isEqualTo(expectedAmount);
     }
 
     @ParameterizedTest
-    @DisplayName("getCardDiscountSum should return result")
+    @DisplayName("getCardDiscountSum should return discount sum")
     @CsvFileSource(resources = "/test_cheque_card_discount.csv", numLinesToSkip = 1, delimiter = ',')
-    void getCardDiscountSumShouldReturnResult(double fstGoodPrice, boolean fstIsDiscounted, int fstGoodQty,
-                                              double sndGoodPrice, boolean sndIsDiscounted, int sndGoodQty,
-                                              double cardDiscountRate, double result) {
+    void getCardDiscountSumShouldReturnDiscountSum
+            (double fstGoodPrice, boolean fstIsDiscounted, int fstGoodQty,
+             double sndGoodPrice, boolean sndIsDiscounted, int sndGoodQty,
+             double cardDiscountRate, double expectedAmount) {
         counter = getCheckCounter(
                 fstGoodPrice, fstIsDiscounted, fstGoodQty,
                 sndGoodPrice, sndIsDiscounted, sndGoodQty,
@@ -136,7 +140,7 @@ class ChequeCounterTest {
 
         double actual = counter.getCardDiscountSum();
 
-        assertThat(actual).isEqualTo(result);
+        assertThat(actual).isEqualTo(expectedAmount);
     }
 
     private ChequeCounter getCheckCounter(double fstGoodPrice, boolean fstIsDiscounted, int fstGoodQty,
@@ -159,8 +163,8 @@ class ChequeCounterTest {
 
     private ChequeCounter getCheckCounter() {
         Map<Product, Integer> products = Map.of(
-        aProduct().build(), 1,
-        aProduct().id(2L).build(), 1
+                aProduct().build(), 1,
+                aProduct().id(2L).build(), 1
         );
         DiscountCard card = aCard().build();
         return new ChequeCounter(products, card);
