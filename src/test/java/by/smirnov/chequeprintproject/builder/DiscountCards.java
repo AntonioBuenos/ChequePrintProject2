@@ -8,10 +8,10 @@ public class DiscountCards {
 
     public static DiscountCard.DiscountCardBuilder aCard(){
         return DiscountCard.builder()
-                .id(1L)
-                .holderName("John Smith")
-                .holderEmail("1001@supermail.com")
-                .discountRate(3.0)
+                .id(5L)
+                .holderName("John")
+                .holderEmail("john@john.com")
+                .discountRate(5.0)
                 .isActive(true)
                 .creationDate(DEFAULT_TIMESTAMP);
     }
