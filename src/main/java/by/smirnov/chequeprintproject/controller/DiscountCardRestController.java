@@ -32,7 +32,7 @@ import static by.smirnov.chequeprintproject.controller.ControllerConstants.MAPPI
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/card")
+@RequestMapping("/cards")
 public class DiscountCardRestController {
 
     private final DiscountCardService service;
