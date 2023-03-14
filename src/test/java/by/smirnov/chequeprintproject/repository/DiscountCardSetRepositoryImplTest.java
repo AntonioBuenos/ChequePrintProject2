@@ -16,7 +16,13 @@ class DiscountCardSetRepositoryImplTest {
     @Test
     @DisplayName("findById should return equal DiscountCard")
     void checkFindByIdShouldReturnEqualDiscountCard() {
-        DiscountCard expected = aCard().build();
+        DiscountCard expected = aCard()
+                .id(1L)
+                .holderName("John Smith")
+                .holderEmail("1001@supermail.com")
+                .discountRate(3.0)
+                .creationDate(Timestamp.valueOf("2022-12-17 23:49:38"))
+                .build();
 
         DiscountCard actual = repository.findById(1L);
 
