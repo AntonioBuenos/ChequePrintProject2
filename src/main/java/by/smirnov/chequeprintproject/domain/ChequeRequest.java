@@ -1,5 +1,8 @@
 package by.smirnov.chequeprintproject.domain;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -15,7 +18,15 @@ import java.util.Map;
 @NoArgsConstructor
 public class ChequeRequest {
 
-private Map<Long, Integer> products;
-private Long cardId;
-private Long cashierId;
+    @NotNull
+    @NotEmpty
+    private Map<Long, Integer> products;
+
+    @Positive
+    @NotNull
+    private Long cardId;
+
+    @Positive
+    @NotNull
+    private Long cashierId;
 }

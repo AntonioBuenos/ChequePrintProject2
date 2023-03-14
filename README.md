@@ -40,7 +40,7 @@ ___
    above. You can put any number of command lines. Each of them will be proceeded.
    Input pattern example: "java file D:\ChequePrintProject\src\main\resources\Cheques.txt"
 3) Spring Boot API part shall be started through ChequePrintProjectApplication boot starter. The requests are to be
-   provided in JSON format in the body of Post requests via 'http://localhost:8081/cheque' endpoint.
+   provided in JSON format in the body of Post requests via 'http://localhost:8081/cheques' endpoint.
    You shall refer Map<Long, Integer> products (where Long is for Product Id and Integer is for quantity of products),
    Long cardId (for Discount card Id) and Long cashierId (for cashier Id). Request may be proceeded e.g. by the means of
    your Frontend, Postman or Intellij IDEA generated requests.
