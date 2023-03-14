@@ -2,7 +2,6 @@ package by.smirnov.chequeprintproject.aop;
 
 import by.smirnov.chequeprintproject.domain.DiscountCard;
 import by.smirnov.chequeprintproject.repository.cache.DiscountCardCache;
-import by.smirnov.chequeprintproject.service.restservice.DiscountCardService;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class InvokeDiscountCardCacheAspect {
 
-    private final DiscountCardService service;
     private final DiscountCardCache cache;
 
     @Pointcut(value = "execution(* by.smirnov.chequeprintproject.service.restservice.DiscountCardService.findById(..)) && args(id))", argNames = "id")
