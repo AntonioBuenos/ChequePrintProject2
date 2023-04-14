@@ -16,7 +16,7 @@ ___
 - Java 17 and Gradle 7.6;
 - Spring 6 & Spring Boot 3;
 - Spring Data JPA Repositories;
-- DB: PostgreSQL with 2 tables (product и discount_card);
+- DB: PostgreSQL with 2 tables (product and discount_card);
 - DB connection pool: Hikari;
 - DB migration: Flyway;
 - JUnit 5 tests;
